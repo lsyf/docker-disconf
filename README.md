@@ -1,10 +1,13 @@
+Dockerfile:
 ```dockerfile
 FROM tomcat:8.5.66-jdk8
 
 ARG app_file
 ADD ${app_file} /usr/local/tomcat/webapps/${webapp_file}
+RUN mv /usr/local/tomcat/webapps/disconf-web /usr/local/tomcat/webapps/ROOT
+VOLUME ["/usr/local/tomcat/webapps/ROOT/html"]
 ```
-
+构建命令：
 ```shell
 docker build \
 --build-arg app_file=disconf-web.tar.gz \
